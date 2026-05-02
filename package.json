@@ -1,0 +1,83 @@
+{
+  "name": "@ssntpl/otper-cli",
+  "version": "0.1.0",
+  "description": "Command-line interface for Otper boards (https://otper.com).",
+  "author": "SSNTPL <hello@ssntpl.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ssntpl/otper-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssntpl/otper-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ssntpl/otper-cli/issues"
+  },
+  "keywords": [
+    "otper",
+    "cli",
+    "kanban",
+    "project-management",
+    "ssntpl"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "otper": "./bin/run.js"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json",
+    "/README.md",
+    "/LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "tsc --noEmit",
+    "prepack": "npm run build && oclif manifest && oclif readme",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "version": "oclif readme && git add README.md",
+    "dev": "tsx ./bin/dev.ts"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.0.30",
+    "@oclif/plugin-autocomplete": "^3.2.10",
+    "@oclif/plugin-help": "^6.2.16",
+    "@oclif/plugin-not-found": "^3.2.27",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.10",
+    "@types/prompts": "^2.4.9",
+    "oclif": "^4.15.16",
+    "shx": "^0.3.4",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  },
+  "oclif": {
+    "bin": "otper",
+    "dirname": "otper",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-autocomplete"
+    ],
+    "topicSeparator": ":",
+    "topics": {
+      "auth": { "description": "Manage authentication credentials" },
+      "board": { "description": "Board commands" },
+      "list": { "description": "List commands" },
+      "card": { "description": "Card commands" },
+      "label": { "description": "Label commands" },
+      "comment": { "description": "Comment commands" },
+      "team": { "description": "Team commands" },
+      "watchlist": { "description": "Watchlist commands" }
+    }
+  }
+}
