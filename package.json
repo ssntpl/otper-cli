@@ -25,21 +25,18 @@
     "otper": "./bin/run.js"
   },
   "files": [
-    "/bin",
-    "/dist",
-    "/oclif.manifest.json",
-    "/README.md",
-    "/LICENSE"
+    "bin/run.js",
+    "dist",
+    "oclif.manifest.json"
   ],
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
+    "build": "shx rm -rf dist && tsc",
     "lint": "tsc --noEmit",
-    "prepack": "npm run build && oclif manifest && oclif readme",
+    "prepack": "npm run build && oclif manifest",
     "postpack": "shx rm -f oclif.manifest.json",
-    "version": "oclif readme && git add README.md",
     "dev": "tsx ./bin/dev.ts"
   },
   "dependencies": {
