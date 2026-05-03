@@ -1,12 +1,12 @@
 # otper-cli
 
-[![npm version](https://img.shields.io/npm/v/@ssntpl/otper-cli.svg)](https://www.npmjs.com/package/@ssntpl/otper-cli)
-[![License](https://img.shields.io/npm/l/@ssntpl/otper-cli.svg)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/otper-cli.svg)](https://www.npmjs.com/package/otper-cli)
+[![License](https://img.shields.io/npm/l/otper-cli.svg)](LICENSE)
 
 Command-line interface for [Otper](https://otper.com) — manage boards, lists, cards, labels, and comments from your terminal. Talks directly to the Otper GraphQL API and is also embeddable as a Node library.
 
 ```sh
-npm install -g @ssntpl/otper-cli
+npm install -g otper-cli
 otper auth:login
 otper board:search "taillog"
 otper card:list --list 119
@@ -29,13 +29,13 @@ otper card:list --list 119
 Requires **Node.js 18+**.
 
 ```sh
-npm install -g @ssntpl/otper-cli
+npm install -g otper-cli
 ```
 
 To use it programmatically in another Node project (no global install needed):
 
 ```sh
-npm install @ssntpl/otper-cli
+npm install otper-cli
 ```
 
 ## Authentication
@@ -203,10 +203,10 @@ otper card:move 1234 --to-list 138 --format silent && echo moved
 
 ## Library usage
 
-`@ssntpl/otper-cli` doubles as a typed library. Useful for openclaw plugins and other Node integrations:
+`otper-cli` doubles as a typed library. Useful for openclaw plugins and other Node integrations:
 
 ```ts
-import { OtperClient, boards, cards, lists } from '@ssntpl/otper-cli';
+import { OtperClient, boards, cards, lists } from 'otper-cli';
 
 const client = new OtperClient({
   baseUrl: 'https://otper.com',
@@ -226,7 +226,7 @@ await cards.moveCard(client, '36905', '120'); // → Done
 You can also load the user's saved config:
 
 ```ts
-import { OtperClient, resolveConfig } from '@ssntpl/otper-cli';
+import { OtperClient, resolveConfig } from 'otper-cli';
 
 const cfg = resolveConfig();             // throws if not authenticated
 const client = OtperClient.fromConfig(cfg);
