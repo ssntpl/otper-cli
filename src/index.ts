@@ -1,9 +1,9 @@
 /**
- * Library entry point for embedding otper-cli inside other Node apps
+ * Library entry point for embedding @ssntpl/otper-cli inside other Node apps
  * (for example, openclaw plugins).
  *
  * Example:
- *   import { OtperClient, boards } from 'otper-cli';
+ *   import { OtperClient, boards } from '@ssntpl/otper-cli';
  *   const client = new OtperClient({ baseUrl: 'https://otper.com', token: '...' });
  *   const board = await boards.getBoard(client, '24');
  */
