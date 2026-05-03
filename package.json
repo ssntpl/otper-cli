@@ -1,6 +1,6 @@
 {
   "name": "@ssntpl/otper-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Command-line interface for Otper boards (https://otper.com).",
   "author": "SSNTPL <info@ssntpl.com>",
   "license": "MIT",
@@ -67,14 +67,30 @@
     ],
     "topicSeparator": ":",
     "topics": {
-      "auth": { "description": "Manage authentication credentials" },
-      "board": { "description": "Board commands" },
-      "list": { "description": "List commands" },
-      "card": { "description": "Card commands" },
-      "label": { "description": "Label commands" },
-      "comment": { "description": "Comment commands" },
-      "team": { "description": "Team commands" },
-      "watchlist": { "description": "Watchlist commands" }
+      "auth": {
+        "description": "Manage authentication credentials"
+      },
+      "board": {
+        "description": "Board commands"
+      },
+      "list": {
+        "description": "List commands"
+      },
+      "card": {
+        "description": "Card commands"
+      },
+      "label": {
+        "description": "Label commands"
+      },
+      "comment": {
+        "description": "Comment commands"
+      },
+      "team": {
+        "description": "Team commands"
+      },
+      "watchlist": {
+        "description": "Watchlist commands"
+      }
     }
   }
 }
