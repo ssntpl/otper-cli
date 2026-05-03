@@ -1,8 +1,8 @@
 {
   "name": "@ssntpl/otper-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Command-line interface for Otper boards (https://otper.com).",
-  "author": "SSNTPL <hello@ssntpl.com>",
+  "author": "SSNTPL <info@ssntpl.com>",
   "license": "MIT",
   "homepage": "https://github.com/ssntpl/otper-cli",
   "repository": {

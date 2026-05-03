@@ -15,7 +15,7 @@ export default class BoardCreate extends BaseCommand<typeof BoardCreate> {
   static description = 'Create a new board in a team.';
 
   static examples = [
-    '<%= config.bin %> board:create --team-id 16 --name "TAILLOG" --key TL --slug taillog',
+    '<%= config.bin %> board:create --team-id 16 --name "Engineering" --key ENG --slug engineering',
   ];
 
   static flags = {

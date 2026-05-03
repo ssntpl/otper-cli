@@ -21,8 +21,8 @@ export default class BoardShow extends BaseCommand<typeof BoardShow> {
   static description = 'Show a board by ID, or by team-slug + board-slug.';
 
   static examples = [
-    '<%= config.bin %> board:show 24',
-    '<%= config.bin %> board:show --team ssntpl --slug taillog',
+    '<%= config.bin %> board:show 7',
+    '<%= config.bin %> board:show --team acme --slug engineering',
   ];
 
   static args = { id: Args.string({ description: 'Board ID', required: false }) };
