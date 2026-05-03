@@ -1,5 +1,5 @@
 {
-  "name": "otper-cli",
+  "name": "@ssntpl/otper-cli",
   "version": "0.1.0",
   "description": "Command-line interface for Otper boards (https://otper.com).",
   "author": "SSNTPL <hello@ssntpl.com>",
