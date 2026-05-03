@@ -8,8 +8,8 @@ Command-line interface for [Otper](https://otper.com) — manage boards, lists, 
 ```sh
 npm install -g @ssntpl/otper-cli
 otper auth:login
-otper board:search "taillog"
-otper card:list --list 119
+otper board:search "engineering"
+otper card:list --list 42
 ```
 
 ## Contents
@@ -60,7 +60,7 @@ Or skip the saved config and use environment variables (handy for CI):
 ```sh
 export OTPER_TOKEN="238|abc..."
 export OTPER_BASE_URL="https://otper.com"
-otper board:search taillog
+otper board:search engineering
 ```
 
 To sign out:
@@ -147,9 +147,9 @@ Run `otper <topic> --help` to see commands within a topic, and `otper <topic>:<c
 The `--search` flag on `card:list` and `list:show` accepts the same syntax as the Otper UI:
 
 ```sh
-otper card:list --list 119 --search "labels:bug;assignee:harsh;status:not completed"
-otper card:list --list 119 --search "due date:overdue"
-otper card:list --list 119 --search "#TL442"
+otper card:list --list 42 --search "labels:bug;assignee:alice;status:not completed"
+otper card:list --list 42 --search "due date:overdue"
+otper card:list --list 42 --search "#ENG123"
 ```
 
 ### Label
@@ -196,9 +196,9 @@ Every command supports `--format`:
 | `silent` | No output, only an exit code (best for scripts). |
 
 ```sh
-otper card:list --list 119 --format json | jq '.data[].title'
+otper card:list --list 42 --format json | jq '.data[].title'
 otper board:search team --format csv > boards.csv
-otper card:move 1234 --to-list 138 --format silent && echo moved
+otper card:move 1234 --to-list 50 --format silent && echo moved
 ```
 
 ## Library usage
@@ -213,14 +213,14 @@ const client = new OtperClient({
   token: process.env.OTPER_TOKEN!,
 });
 
-const board = await boards.getBoard(client, '24');
-const inProgress = await lists.getListWithCards(client, '119', 1);
+const board = await boards.getBoard(client, '7');
+const inProgress = await lists.getListWithCards(client, '42', 1);
 
 for (const card of inProgress!.cards.data) {
   console.log(card.card_number, card.title);
 }
 
-await cards.moveCard(client, '36905', '120'); // → Done
+await cards.moveCard(client, '1234', '50'); // → Done
 ```
 
 You can also load the user's saved config:
@@ -245,7 +245,7 @@ const data = await client.gql<{ me: { id: string } }>(
 **Daily standup digest** — list everything in progress and pipe into a summary:
 
 ```sh
-otper card:list --list 119 --format csv > standup.csv
+otper card:list --list 42 --format csv > inprogress.csv
 ```
 
 **Move a card to Done in a script:**

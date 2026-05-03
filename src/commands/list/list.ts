@@ -19,8 +19,8 @@ export default class ListList extends BaseCommand<typeof ListList> {
   static description = 'List all lists on a board.';
 
   static examples = [
-    '<%= config.bin %> list:list --board 24',
-    '<%= config.bin %> list:list --team ssntpl --slug taillog',
+    '<%= config.bin %> list:list --board 7',
+    '<%= config.bin %> list:list --team acme --slug engineering',
   ];
 
   static flags = {
