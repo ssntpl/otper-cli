@@ -40,7 +40,7 @@ npm install @ssntpl/otper-cli
 
 ## Authentication
 
-Otper uses Bearer tokens. Generate a personal access token from your Otper account settings, then:
+Otper uses Bearer tokens. Generate a personal access token at **https://otper.com/settings/tokens**, then:
 
 ```sh
 otper auth:login
