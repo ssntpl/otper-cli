@@ -21,6 +21,7 @@ export {
 } from './api/config';
 
 export * from './api/types';
+export { toOtperDateTime } from './api/datetime';
 export * as boards from './api/boards';
 export * as lists from './api/lists';
 export * as cards from './api/cards';

@@ -58,7 +58,7 @@ const DELETE_CARD = /* GraphQL */ `
 
 const MOVE_TO = /* GraphQL */ `
   mutation MoveTo($input: moveToInput!) {
-    MoveTo(input: $input) { status message }
+    MoveTo(input: $input) { message }
   }
 `;
 
@@ -114,8 +114,8 @@ export async function moveCard(
   cardId: string,
   toListId: string,
   overCardId?: string,
-): Promise<{ status: string; message: string }> {
-  const data = await client.gql<{ MoveTo: { status: string; message: string } }>(MOVE_TO, {
+): Promise<{ message: string }> {
+  const data = await client.gql<{ MoveTo: { message: string } }>(MOVE_TO, {
     input: { cardId, toListId, overCardId },
   });
   return data.MoveTo;

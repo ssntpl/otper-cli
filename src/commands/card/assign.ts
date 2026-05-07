@@ -2,6 +2,7 @@ import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../../base';
 import { Column } from '../../format';
 import { updateCard } from '../../api/cards';
+import { toOtperDateTime } from '../../api/datetime';
 import { Card } from '../../api/types';
 
 const COLUMNS: Column<Card>[] = [
@@ -23,7 +24,7 @@ export default class CardAssign extends BaseCommand<typeof CardAssign> {
 
   async run(): Promise<void> {
     const { args } = await this.parse(CardAssign);
-    const now = new Date().toISOString();
+    const now = toOtperDateTime();
     const card = await updateCard(this.api, {
       id: args.id,
       users: { connect: this.flags.user.map((id) => ({ id, assigned_at: now })) },

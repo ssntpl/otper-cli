@@ -8,7 +8,6 @@ const TEAM_QUERY = /* GraphQL */ `
       slug
       name
       personal_team
-      is_private
       created_at
       users {
         id
@@ -21,7 +20,6 @@ const TEAM_QUERY = /* GraphQL */ `
         slug
         name
         key
-        is_private
       }
     }
   }

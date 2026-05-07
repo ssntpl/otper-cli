@@ -55,7 +55,7 @@ const DELETE_LISTS = /* GraphQL */ `
 
 const REORDER_LISTS = /* GraphQL */ `
   mutation ReorderLists($input: reorderListsInput!) {
-    reorderLists(input: $input) { status message }
+    reorderLists(input: $input) { message }
   }
 `;
 
@@ -116,8 +116,8 @@ export async function reorderLists(
   client: OtperClient,
   activeListId: string,
   toListId: string,
-): Promise<{ status: string; message: string }> {
-  const data = await client.gql<{ reorderLists: { status: string; message: string } }>(
+): Promise<{ message: string }> {
+  const data = await client.gql<{ reorderLists: { message: string } }>(
     REORDER_LISTS,
     { input: { activelistId: activeListId, toListId } },
   );
