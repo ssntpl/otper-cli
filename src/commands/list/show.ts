@@ -34,6 +34,7 @@ export default class ListShow extends BaseCommand<typeof ListShow> {
       this.log(JSON.stringify(list, null, 2));
       return;
     }
+    if (this.flags.format === 'silent') return;
     this.log(`List: ${list.name} (id ${list.id})`);
     this.log(
       `Cards: ${list.cards.paginatorInfo.total} total, page ${list.cards.paginatorInfo.currentPage}/${list.cards.paginatorInfo.lastPage}`,

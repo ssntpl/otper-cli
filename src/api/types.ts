@@ -17,7 +17,6 @@ export interface Team {
   slug: string;
   name: string;
   personal_team: boolean;
-  is_private: boolean;
   created_at?: string;
   updated_at?: string;
   users?: User[];

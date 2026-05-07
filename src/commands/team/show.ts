@@ -9,7 +9,6 @@ const COLUMNS: Column<Team>[] = [
   { header: 'Slug', get: (t) => t.slug },
   { header: 'Name', get: (t) => t.name },
   { header: 'Personal', get: (t) => (t.personal_team ? 'yes' : 'no') },
-  { header: 'Private', get: (t) => (t.is_private ? 'yes' : 'no') },
   { header: 'Members', get: (t) => t.users?.length ?? 0 },
   { header: 'Boards', get: (t) => t.boards?.length ?? 0 },
 ];

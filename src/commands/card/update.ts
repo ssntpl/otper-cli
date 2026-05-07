@@ -2,6 +2,7 @@ import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../../base';
 import { Column } from '../../format';
 import { updateCard, UpdateCardInput } from '../../api/cards';
+import { toOtperDateTime } from '../../api/datetime';
 import { Card } from '../../api/types';
 
 const COLUMNS: Column<Card>[] = [
@@ -40,7 +41,7 @@ export default class CardUpdate extends BaseCommand<typeof CardUpdate> {
     if (this.flags['start-time'] !== undefined)
       input.start_time = this.flags['start-time'] === 'null' ? null : this.flags['start-time'];
     if (this.flags['mark-done'] !== undefined) input.is_due_date_complete = this.flags['mark-done'];
-    if (this.flags.archive) input.archived_at = new Date().toISOString();
+    if (this.flags.archive) input.archived_at = toOtperDateTime();
     if (this.flags.unarchive) input.archived_at = null;
     const card = await updateCard(this.api, input);
     this.output([card], { columns: COLUMNS, vertical: true, json: card });
