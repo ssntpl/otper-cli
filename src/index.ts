@@ -30,3 +30,4 @@ export * as comments from './api/comments';
 export * as users from './api/users';
 export * as teams from './api/teams';
 export * as priorities from './api/priorities';
+export * as files from './api/files';
