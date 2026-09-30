@@ -3,7 +3,7 @@ import { Card } from './types';
 
 const CARD_FIELDS = /* GraphQL */ `
   id slug title description pos card_number rework total_working_time
-  start_time end_time due_date is_due_date_complete archived_at created_at updated_at
+  start_time end_time due_date is_due_date_complete closed_at created_at updated_at
 `;
 
 const CARD_QUERY = /* GraphQL */ `
@@ -56,6 +56,42 @@ const DELETE_CARD = /* GraphQL */ `
   }
 `;
 
+const CLOSE_CARD = /* GraphQL */ `
+  mutation CloseCard($id: ID!, $reason: String) {
+    closeCard(id: $id, reason: $reason) {
+      ${CARD_FIELDS}
+      list { id name }
+    }
+  }
+`;
+
+const REOPEN_CARD = /* GraphQL */ `
+  mutation ReopenCard($id: ID!) {
+    reopenCard(id: $id) {
+      ${CARD_FIELDS}
+      list { id name }
+    }
+  }
+`;
+
+const ASSIGN_CARD_MEMBER = /* GraphQL */ `
+  mutation AssignCardMember($card_id: ID!, $user_id: ID!) {
+    assignCardMember(card_id: $card_id, user_id: $user_id) {
+      ${CARD_FIELDS}
+      users { id name username }
+    }
+  }
+`;
+
+const UNASSIGN_CARD_MEMBER = /* GraphQL */ `
+  mutation UnassignCardMember($card_id: ID!, $user_id: ID!) {
+    unassignCardMember(card_id: $card_id, user_id: $user_id) {
+      ${CARD_FIELDS}
+      users { id name username }
+    }
+  }
+`;
+
 const MOVE_TO = /* GraphQL */ `
   mutation MoveTo($input: moveToInput!) {
     MoveTo(input: $input) { message }
@@ -92,11 +128,9 @@ export interface UpdateCardInput {
   start_time?: string | null;
   due_date?: string | null;
   is_due_date_complete?: boolean;
-  archived_at?: string | null;
   total_working_time?: string;
   list?: { connect: string };
   labels?: { connect?: string[]; disconnect?: string[] };
-  users?: { connect?: { id: string; assigned_at: string }[]; disconnect?: string[] };
 }
 
 export async function updateCard(client: OtperClient, input: UpdateCardInput): Promise<Card> {
@@ -107,6 +141,32 @@ export async function updateCard(client: OtperClient, input: UpdateCardInput): P
 export async function deleteCard(client: OtperClient, id: string): Promise<Card> {
   const data = await client.gql<{ deleteCard: Card }>(DELETE_CARD, { id });
   return data.deleteCard;
+}
+
+export async function closeCard(client: OtperClient, id: string, reason?: string): Promise<Card> {
+  const data = await client.gql<{ closeCard: Card }>(CLOSE_CARD, { id, reason });
+  return data.closeCard;
+}
+
+export async function reopenCard(client: OtperClient, id: string): Promise<Card> {
+  const data = await client.gql<{ reopenCard: Card }>(REOPEN_CARD, { id });
+  return data.reopenCard;
+}
+
+export async function assignCardMember(client: OtperClient, cardId: string, userId: string): Promise<Card> {
+  const data = await client.gql<{ assignCardMember: Card }>(ASSIGN_CARD_MEMBER, {
+    card_id: cardId,
+    user_id: userId,
+  });
+  return data.assignCardMember;
+}
+
+export async function unassignCardMember(client: OtperClient, cardId: string, userId: string): Promise<Card> {
+  const data = await client.gql<{ unassignCardMember: Card }>(UNASSIGN_CARD_MEMBER, {
+    card_id: cardId,
+    user_id: userId,
+  });
+  return data.unassignCardMember;
 }
 
 export async function moveCard(

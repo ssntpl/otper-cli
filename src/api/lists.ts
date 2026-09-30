@@ -21,7 +21,7 @@ const LIST_WITH_CARDS = /* GraphQL */ `
       ${LIST_FIELDS}
       cards(first: 25, page: $page, search: $search) {
         data {
-          id slug title card_number pos due_date archived_at
+          id slug title card_number pos due_date closed_at
           labels { id name color }
           users { id name username }
         }

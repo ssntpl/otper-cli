@@ -76,7 +76,7 @@ export interface Card {
   end_time?: string | null;
   due_date?: string | null;
   is_due_date_complete?: boolean | null;
-  archived_at?: string | null;
+  closed_at?: string | null;
   created_at?: string;
   updated_at?: string;
   board?: Board;

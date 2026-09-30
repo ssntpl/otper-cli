@@ -1,7 +1,7 @@
 import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../../base';
 import { Column } from '../../format';
-import { updateCard } from '../../api/cards';
+import { unassignCardMember } from '../../api/cards';
 import { Card } from '../../api/types';
 
 const COLUMNS: Column<Card>[] = [
@@ -21,10 +21,9 @@ export default class CardUnassign extends BaseCommand<typeof CardUnassign> {
 
   async run(): Promise<void> {
     const { args } = await this.parse(CardUnassign);
-    const card = await updateCard(this.api, {
-      id: args.id,
-      users: { disconnect: this.flags.user },
-    });
+    // The API takes one user per call; the last response carries the final assignee list.
+    let card!: Card;
+    for (const userId of this.flags.user) card = await unassignCardMember(this.api, args.id, userId);
     this.output([card], { columns: COLUMNS, vertical: true, json: card });
   }
 }

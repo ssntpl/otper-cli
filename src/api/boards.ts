@@ -103,7 +103,6 @@ export interface UpdateBoardInput {
   name?: string;
   description?: string;
   is_private?: boolean;
-  archived_at?: string | null;
 }
 
 export async function updateBoard(client: OtperClient, input: UpdateBoardInput): Promise<Board> {

@@ -1,8 +1,7 @@
 import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../../base';
 import { Column } from '../../format';
-import { updateCard, UpdateCardInput } from '../../api/cards';
-import { toOtperDateTime } from '../../api/datetime';
+import { closeCard, reopenCard, updateCard, UpdateCardInput } from '../../api/cards';
 import { Card } from '../../api/types';
 
 const COLUMNS: Column<Card>[] = [
@@ -27,8 +26,9 @@ export default class CardUpdate extends BaseCommand<typeof CardUpdate> {
       summary: 'Mark due date complete',
       allowNo: true,
     }),
-    archive: Flags.boolean({ summary: 'Archive the card' }),
-    unarchive: Flags.boolean({ summary: 'Unarchive the card' }),
+    archive: Flags.boolean({ summary: 'Archive (close) the card', exclusive: ['unarchive'] }),
+    unarchive: Flags.boolean({ summary: 'Unarchive (reopen) the card' }),
+    reason: Flags.string({ summary: 'Close reason (with --archive)', dependsOn: ['archive'] }),
   };
 
   async run(): Promise<void> {
@@ -41,9 +41,10 @@ export default class CardUpdate extends BaseCommand<typeof CardUpdate> {
     if (this.flags['start-time'] !== undefined)
       input.start_time = this.flags['start-time'] === 'null' ? null : this.flags['start-time'];
     if (this.flags['mark-done'] !== undefined) input.is_due_date_complete = this.flags['mark-done'];
-    if (this.flags.archive) input.archived_at = toOtperDateTime();
-    if (this.flags.unarchive) input.archived_at = null;
-    const card = await updateCard(this.api, input);
+    let card = Object.keys(input).length > 1 ? await updateCard(this.api, input) : undefined;
+    if (this.flags.archive) card = await closeCard(this.api, args.id, this.flags.reason);
+    if (this.flags.unarchive) card = await reopenCard(this.api, args.id);
+    if (!card) this.error('Nothing to update.');
     this.output([card], { columns: COLUMNS, vertical: true, json: card });
   }
 }
